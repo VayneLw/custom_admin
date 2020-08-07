@@ -41,9 +41,9 @@ public class UserRepositoryTest {
     public void save(){
         User user = new User();
         user.setPin("upc_lw_2020");
-        user.setPassword(passwordEncoder.encode("123"));
+        user.setPassword(passwordEncoder.encode("123456"));
         user.setNickName("lw_test_1");
-        user.setPhone("18800");
+        user.setPhone("admin");
         user.setCreateBy("lw");
         user.setCreateTime(new Date());
         User save = userRepository.save(user);
