@@ -1,7 +1,11 @@
 package com.upc.lw.jpa;
 
 import com.alibaba.fastjson.JSONObject;
+import com.upc.lw.system.Dept;
 import com.upc.lw.system.User;
+import com.upc.lw.system.dto.UserDto;
+import com.upc.lw.system.mapstruct.UserMapper;
+import com.upc.lw.system.repository.DeptRepository;
 import com.upc.lw.system.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
@@ -31,6 +35,9 @@ public class UserRepositoryTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Test
     public void findAll(){
         List<User> userList = userRepository.findAll();
@@ -40,12 +47,18 @@ public class UserRepositoryTest {
     @Test
     public void save(){
         User user = new User();
-        user.setPin("upc_lw_2020");
+        Dept dept = new Dept();
+        dept.setId(1L);
+
+        user.setPin("upc_lw_2021");
         user.setPassword(passwordEncoder.encode("123456"));
-        user.setNickName("lw_test_1");
+        user.setNickName("lw_test");
         user.setPhone("admin");
         user.setCreateBy("lw");
         user.setCreateTime(new Date());
+        user.setDept(dept);
+        user.setStatus(1);
+
         User save = userRepository.save(user);
         log.info("============ret:{}",save);
     }
@@ -80,6 +93,16 @@ public class UserRepositoryTest {
     public void findByEmail(){
         User user = userRepository.findByEmail("lbj@163.com");
         log.info("===============ret:{}",JSONObject.toJSON(user));
+    }
+
+    @Test
+    public void testMapper(){
+        User user =new User();
+        user.setStatus(1);
+        user.setNickName("6666");
+
+        UserDto userDto = userMapper.toDto(user);
+        log.info("===============ret:{}",JSONObject.toJSON(userDto));
     }
 
 }

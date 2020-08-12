@@ -1,12 +1,15 @@
 package com.upc.lw.security.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Sets;
 import com.upc.lw.system.dto.UserDto;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @Description
@@ -16,6 +19,15 @@ import java.util.Collection;
 @Data
 public class JwtUserDto implements UserDetails {
     private UserDto user;
+
+    private List<Long> dataScopes;
+
+    @JsonIgnore
+    private List<GrantedAuthority> authorities;
+
+    public Set<String> getRoles() {
+        return Sets.newHashSet("admin");
+    }
 
     @Override
     @JsonIgnore
@@ -56,6 +68,6 @@ public class JwtUserDto implements UserDetails {
     @Override
     @JsonIgnore
     public boolean isEnabled() {
-        return user.getEnabled() == 1;
+        return user.getStatus() == 1;
     }
 }

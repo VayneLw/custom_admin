@@ -12,14 +12,14 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * @Description 角色表
+ * @Description
  * @author: liwei
- * @date: 2020/8/6 14:21
+ * @date: 2020/8/11 13:49
  */
-@Entity
-@Table(name = "sys_role")
 @Data
-public class Role extends BaseEntity implements Serializable {
+@Entity
+@Table(name = "sys_job")
+public class Job extends BaseEntity implements Serializable {
 
     @Id
     @Column(name="id")

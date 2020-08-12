@@ -21,4 +21,9 @@ public class BaseEntity implements Serializable {
 
     @Column(name="create_time")
     private Date createTime;
+
+    /**
+     * 状态 0失效  1 有效
+     */
+    private int status;
 }

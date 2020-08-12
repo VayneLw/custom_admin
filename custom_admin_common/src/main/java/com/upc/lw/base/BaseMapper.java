@@ -1,5 +1,7 @@
 package com.upc.lw.base;
 
+import java.util.List;
+
 /**
  * @Description
  * @author: liwei
@@ -20,4 +22,8 @@ public interface BaseMapper<D,E> {
      * @return
      */
     D toDto(E e);
+
+    List<E> toEntity(List<D> d);
+
+    List<D> toDto(List<E> e);
 }

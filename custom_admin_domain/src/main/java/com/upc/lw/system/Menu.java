@@ -12,20 +12,31 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * @Description 角色表
+ * @Description
  * @author: liwei
- * @date: 2020/8/6 14:21
+ * @date: 2020/8/11 15:37
  */
 @Entity
-@Table(name = "sys_role")
+@Table(name = "sys_menu")
 @Data
-public class Role extends BaseEntity implements Serializable {
+public class Menu extends BaseEntity implements Serializable {
 
     @Id
-    @Column(name="id")
+    @Column(name="menu_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="pid")
+    private Long parentId;
+
     private String name;
+
+    private String component;
+
+    private String path;
+
+    private String title;
+
+    private String icon;
 
 }

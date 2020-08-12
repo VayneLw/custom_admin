@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -24,7 +23,6 @@ public class Dept extends BaseEntity implements Serializable {
 
     @Id
     @Column(name="dept_id")
-    @NotBlank
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,8 +31,4 @@ public class Dept extends BaseEntity implements Serializable {
     @Column(name="pid")
     private Long parentId;
 
-    /**
-     * 状态 0失效  1 有效
-     */
-    private int status;
 }

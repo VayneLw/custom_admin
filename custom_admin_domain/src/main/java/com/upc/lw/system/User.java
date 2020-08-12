@@ -9,10 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @Description 用户表
@@ -33,6 +36,18 @@ public class User extends BaseEntity implements Serializable {
 
     private String pin;
 
+    @ManyToMany
+    @JoinTable(name="sys_user_roles",
+            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName="user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName="id")})
+    private Set<Role> roles;
+
+    @ManyToMany
+    @JoinTable(name="sys_user_jobs",
+            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName="user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "job_id",referencedColumnName="id")})
+    private Set<Job> jobs;
+
     /**
      * 使用security加密
      */
@@ -50,10 +65,5 @@ public class User extends BaseEntity implements Serializable {
     private String phone;
 
     private String email;
-
-    /**
-     * 状态 0失效  1 有效
-     */
-    private int status;
 
 }
