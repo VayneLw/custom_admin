@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 菜单页--对外接口
  * @author: liwei
  * @date: 2020/8/11 13:59
  */
@@ -25,6 +25,10 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
+    /**
+     * 返回菜单页
+     * @return
+     */
     @RequestMapping("/build")
     public ResponseEntity<Object> buildMenus() {
         List<MenuDto> menuDtoList = menuService.findMenusByUser(SecurityUtils.getCurrentUserId());

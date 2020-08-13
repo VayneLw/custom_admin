@@ -24,7 +24,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        UserDto userDto = userService.findByPhone(s);
+        UserDto userDto = userService.findByPhoneOrPin(s);
         JwtUserDto jwtUserDto = new JwtUserDto();
 
         jwtUserDto.setUser(userDto);

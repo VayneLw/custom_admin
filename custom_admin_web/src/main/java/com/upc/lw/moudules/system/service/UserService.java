@@ -1,6 +1,9 @@
 package com.upc.lw.moudules.system.service;
 
 import com.upc.lw.system.dto.UserDto;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Map;
 
 /**
  * @Description
@@ -8,5 +11,7 @@ import com.upc.lw.system.dto.UserDto;
  * @date: 2020/8/6 17:06
  */
 public interface UserService {
-    UserDto findByPhone(String phone);
+    UserDto findByPhoneOrPin(String info);
+
+    Map<String,Object> findUsers(Pageable pageable);
 }

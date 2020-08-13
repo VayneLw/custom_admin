@@ -24,6 +24,10 @@ public class MenuDto extends BaseDto implements Serializable {
 
     private String name;
 
+    /**
+     * 地址映射前端页面 view地址
+     * 比如 component=system/user/index   对应前端 ./view/system/user/index.vue
+     */
     private String component;
 
     private String path;

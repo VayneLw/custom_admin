@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description
+ * @Description 每次请求，获取当前上下文用户信息
  * @author: liwei
  * @date: 2020/8/11 17:15
  */

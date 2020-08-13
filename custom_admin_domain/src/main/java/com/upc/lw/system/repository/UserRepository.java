@@ -2,6 +2,7 @@ package com.upc.lw.system.repository;
 
 import com.upc.lw.system.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -26,7 +27,7 @@ import java.util.List;
  * @author: liwei
  * @date: 2020/8/6 14:44
  */
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
     /**
      * 根据pin查询用户信息
      *
@@ -34,6 +35,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @return
      */
     User findByPin(String pin);
+
 
     /**
      * 查询用户

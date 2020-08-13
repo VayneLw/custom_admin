@@ -1,0 +1,43 @@
+#数据源配置  mysql、redis、mongo
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.205.128:3306/customAdmin
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+      host: 192.168.205.128
+      port: 6379
+  data:
+      mongodb:
+        uri: mongodb://192.168.205.128:27017/lw_db
+        username: lbj
+        password: 1234
+  jpa:
+    show-sql: true
+
+
+#验证码
+login:
+ loginCode:
+  codeType: arithmetic
+  expiration: 2
+  length: 1
+  width: 100
+  height: 30
+  frontName: 楷体
+  frontSize: 30
+
+#rsa密钥
+rsa:
+ private:
+  key: MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEA0vfvyTdGJkdbHkB8mp0f3FE0GYP3AYPaJF7jUd1M0XxFSE2ceK3k2kw20YvQ09NJKk+OMjWQl9WitG9pB6tSCQIDAQABAkA2SimBrWC2/wvauBuYqjCFwLvYiRYqZKThUS3MZlebXJiLB+Ue/gUifAAKIg1avttUZsHBHrop4qfJCwAI0+YRAiEA+W3NK/RaXtnRqmoUUkb59zsZUBLpvZgQPfj1MhyHDz0CIQDYhsAhPJ3mgS64NbUZmGWuuNKp5coY2GIj/zYDMJp6vQIgUueLFXv/eZ1ekgz2Oi67MNCk5jeTF2BurZqNLR3MSmUCIFT3Q6uHMtsB9Eha4u7hS31tj1UWE+D+ADzp59MGnoftAiBeHT7gDMuqeJHPL4b+kC+gzV4FGTfhR9q3tTbklZkD2A==
+
+#JWT
+jwt:
+ header: Authorization
+ token-start-with: Bearer
+ base64-Secret:
+ online-key: online-token-
+ expire-minutes: 60
