@@ -1,6 +1,9 @@
 package com.upc.lw.request.user;
 
+import com.upc.lw.annotation.Query;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @Description
@@ -10,6 +13,13 @@ import lombok.Data;
 public interface UserRequest {
     @Data
     class QueryArg{
+        @Query(propName = "id",type = Query.Type.EQUAL,joinName = "dept")
         String deptId;
+
+        @Query(type = Query.Type.GREATER_THAN)
+        Date createTime;
+
+        @Query
+        String id;
     }
 }

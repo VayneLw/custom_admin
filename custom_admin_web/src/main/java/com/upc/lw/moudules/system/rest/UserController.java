@@ -30,11 +30,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<Object> userList(UserRequest.QueryArg arg, Pageable pageable) {
         try {
-            Map<String, Object> map = userService.findUsers(pageable);
+            Map<String, Object> map = userService.findUserListByArg(arg, pageable);
             return new ResponseEntity<>(map, HttpStatus.OK);
         } catch (Exception e) {
             log.info("userList error:{}", e);
         }
         return new ResponseEntity<>(PageUtils.toPage(null, 0), HttpStatus.OK);
     }
+
 }

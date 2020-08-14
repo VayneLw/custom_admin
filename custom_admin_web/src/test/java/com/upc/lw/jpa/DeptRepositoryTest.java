@@ -1,5 +1,6 @@
 package com.upc.lw.jpa;
 
+import com.upc.lw.moudules.system.service.DeptService;
 import com.upc.lw.system.Dept;
 import com.upc.lw.system.repository.DeptRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -31,5 +32,11 @@ public class DeptRepositoryTest {
 
         Dept save = deptRepository.save(dept);
         log.info("============ret:{}",save);
+    }
+
+    @Test
+    public void test(){
+        DeptService[] deptServices = new DeptService[0];
+        System.out.println(deptServices);
     }
 }

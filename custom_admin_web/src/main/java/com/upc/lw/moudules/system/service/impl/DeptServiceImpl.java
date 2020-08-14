@@ -40,4 +40,5 @@ public class DeptServiceImpl implements DeptService {
         Map<String, Object> page = PageUtils.toPage(deptDtoList, deptDtoList.size());
         return page;
     }
+
 }

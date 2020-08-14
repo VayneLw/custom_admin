@@ -2,17 +2,20 @@ package com.upc.lw.moudules.system.service.impl;
 
 import com.upc.lw.exception.EntityNotFoundException;
 import com.upc.lw.moudules.system.service.UserService;
+import com.upc.lw.request.user.UserRequest;
 import com.upc.lw.system.User;
 import com.upc.lw.system.dto.UserDto;
 import com.upc.lw.system.mapstruct.UserMapper;
 import com.upc.lw.system.repository.UserRepository;
 import com.upc.lw.utills.PageUtils;
+import com.upc.lw.utills.QueryHelp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -57,6 +60,16 @@ public class UserServiceImpl implements UserService {
 
         Page<User> users = userRepository.findAll(pageable);
         Map<String, Object> page = PageUtils.toPage(users.map(userMapper::toDto));
+        return page;
+    }
+
+    @Override
+    public Map<String, Object> findUserListByArg(UserRequest.QueryArg arg, Pageable pageable) {
+        Page<User> users = userRepository.findAll((root, query, criteriaBuilder) ->
+                QueryHelp.toPredicate(root, arg, criteriaBuilder), pageable);
+
+        List<UserDto> userDtoList = userMapper.toDto(users.getContent());
+        Map<String, Object> page = PageUtils.toPage(userDtoList, userDtoList.size());
         return page;
     }
 

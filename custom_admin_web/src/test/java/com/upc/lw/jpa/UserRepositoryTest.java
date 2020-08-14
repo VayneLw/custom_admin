@@ -1,11 +1,12 @@
 package com.upc.lw.jpa;
 
 import com.alibaba.fastjson.JSONObject;
+import com.upc.lw.moudules.system.service.UserService;
+import com.upc.lw.request.user.UserRequest;
 import com.upc.lw.system.Dept;
 import com.upc.lw.system.User;
 import com.upc.lw.system.dto.UserDto;
 import com.upc.lw.system.mapstruct.UserMapper;
-import com.upc.lw.system.repository.DeptRepository;
 import com.upc.lw.system.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
@@ -13,6 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -28,6 +31,9 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserRepositoryTest {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -103,6 +109,27 @@ public class UserRepositoryTest {
 
         UserDto userDto = userMapper.toDto(user);
         log.info("===============ret:{}",JSONObject.toJSON(userDto));
+    }
+
+    @Test
+    public void testSpec(){
+        UserRequest.QueryArg arg = new UserRequest.QueryArg();
+        arg.setDeptId("1");
+
+        Pageable pageable = new PageRequest(0, 10);
+
+        userService.findUserListByArg(arg, pageable);
+    }
+
+    @Test
+    public void testSpec2(){
+        UserRequest.QueryArg arg = new UserRequest.QueryArg();
+        arg.setCreateTime(new Date());
+
+        Pageable pageable = new PageRequest(0, 10);
+
+        //userService.findUserListByArg(arg, pageable);
+        userService.findUsers(pageable);
     }
 
 }
