@@ -26,10 +26,11 @@ public class LogAspect {
     }
 
     @Around("logPointcut(log)")
-    public void logAround(ProceedingJoinPoint joinPoint,Log log) throws Throwable {
+    public Object logAround(ProceedingJoinPoint joinPoint,Log log) throws Throwable {
         String methodName = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         logger.info("方法 {} 入参: {} ", methodName, JSON.toJSONString(joinPoint.getArgs()));
         Object proceed = joinPoint.proceed();
         logger.info("方法 {} 结果: {} ", methodName, proceed);
+        return proceed;
     }
 }

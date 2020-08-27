@@ -18,7 +18,7 @@ public class LoginMessageProducer {
     @Resource
     private RocketMQTemplate rocketMQTemplate;
 
-    @Value("${login.topic}")
+    @Value("${mq.login.topic}")
     private String topic;
 
     public void sendMessage(String content) {

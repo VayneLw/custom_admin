@@ -2,6 +2,7 @@ package com.upc.lw.moudules.system.rest;
 
 import com.upc.lw.moudules.system.service.DeptService;
 import com.upc.lw.request.dept.DeptRequest;
+import com.upc.lw.system.dto.DeptDto;
 import com.upc.lw.utills.PageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,8 +31,9 @@ public class DeptController {
     @GetMapping
     public ResponseEntity<Object> deptList(DeptRequest.QueryArg arg) {
         try {
-            Map<String, Object> map = deptService.findDeptList(arg);
-            return new ResponseEntity<>(map, HttpStatus.OK);
+            List<DeptDto> deptList = deptService.findDeptList(arg);
+            Map<String, Object> trees = deptService.buildTrees(deptList);
+            return new ResponseEntity<>(trees, HttpStatus.OK);
         } catch (Exception e) {
             log.info("deptList error:{}", e);
         }

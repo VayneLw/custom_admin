@@ -46,3 +46,9 @@ jwt:
  base64-Secret:
  online-key: online-token-
  expire-minutes: 60
+
+#自定义配置参数
+mq:
+ login:
+  topic: lwtest
+  group: lw01

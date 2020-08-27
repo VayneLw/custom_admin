@@ -33,6 +33,22 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>online</id>
+            <properties>
+               <login.topic>lwTest</login.topic>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
     <!-- 打包 -->
     <build>
         <plugins>
@@ -49,6 +65,7 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
 
 </project>

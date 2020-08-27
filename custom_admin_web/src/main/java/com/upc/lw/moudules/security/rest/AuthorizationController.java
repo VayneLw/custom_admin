@@ -5,7 +5,6 @@ import com.upc.lw.annotation.Log;
 import com.upc.lw.moudules.security.config.TokenProvider;
 import com.upc.lw.moudules.security.config.bean.LoginProperties;
 import com.upc.lw.moudules.security.config.bean.SecurityProperties;
-import com.upc.lw.moudules.security.mq.LoginMessageProducer;
 import com.upc.lw.moudules.security.service.OnlineUserService;
 import com.upc.lw.request.LoginRequest;
 import com.upc.lw.response.ResponseUtil;
@@ -61,9 +60,6 @@ public class AuthorizationController {
 
     @Autowired
     private OnlineUserService onlineUserService;
-
-    @Autowired
-    private LoginMessageProducer loginMessageProducer;
 
     @Value("${rsa.private.key}")
     private String rsaPrivateKey;
@@ -124,8 +120,6 @@ public class AuthorizationController {
             imgRet.put("img", captcha.toBase64());
             imgRet.put("uuid", uuid);
             log.info("getCode uuid:{},codeText:{}", uuid, captcha.text());
-
-            loginMessageProducer.sendMessage("test=====lw====");
         } catch (Exception e) {
             log.error("getCode error:", e);
             return ResponseEntity.badRequest().body(ResponseUtil.fail());

@@ -4,6 +4,7 @@ import com.upc.lw.base.BaseDto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description
@@ -16,5 +17,17 @@ public class DeptDto extends BaseDto implements Serializable {
 
     private String name;
 
-    private Long parentId;
+    private Long pid;
+
+    private Integer subCount = 0;
+
+    private List<DeptDto> children;
+
+    public boolean getHasChildren() {
+        return subCount > 0;
+    }
+
+    public String getLabel(){
+        return name;
+    }
 }

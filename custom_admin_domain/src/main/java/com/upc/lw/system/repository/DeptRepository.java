@@ -14,8 +14,7 @@ import java.util.List;
 public interface DeptRepository extends JpaRepository<Dept, String> {
 
     @Query(value = "select * from sys_dept where pid=? and status=1", nativeQuery = true)
-    List<Dept> findByParentId(Integer pid);
+    List<Dept> findByPid(Integer pid);
 
-    List<Dept> findByParentIdIsNull();
-
+    List<Dept> findByPidIsNull();
 }

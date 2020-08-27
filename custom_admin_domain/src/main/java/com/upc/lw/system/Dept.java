@@ -29,6 +29,8 @@ public class Dept extends BaseEntity implements Serializable {
     private String name;
 
     @Column(name="pid")
-    private Long parentId;
+    private Long pid;
+
+    private Integer subCount=0;
 
 }
