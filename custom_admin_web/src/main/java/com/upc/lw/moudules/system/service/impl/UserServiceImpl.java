@@ -11,10 +11,13 @@ import com.upc.lw.utills.PageUtils;
 import com.upc.lw.utills.QueryHelp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -34,6 +37,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Value("${rsa.public.key}")
+    private String rsaPublicKey;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private static final Pattern CHINA_PATTERN = Pattern.compile("^((13[0-9])|(14[0,1,4-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[0-3,5-9]))\\d{8}$");
 
@@ -71,6 +80,18 @@ public class UserServiceImpl implements UserService {
         List<UserDto> userDtoList = userMapper.toDto(users.getContent());
         Map<String, Object> page = PageUtils.toPage(userDtoList, userDtoList.size());
         return page;
+    }
+
+    @Override
+    public void createUser(User user) {
+        try {
+            //加密
+            user.setPassword(passwordEncoder.encode("123456"));
+            user.setCreateTime(new Date());
+            userRepository.save(user);
+        }catch (Exception e){
+            log.error("createUser pin:{},error:", user.getPin(),e);
+        }
     }
 
     private static boolean isPhone(String value) {

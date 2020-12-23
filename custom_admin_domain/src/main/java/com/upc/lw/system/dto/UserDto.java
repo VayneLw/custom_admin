@@ -20,7 +20,6 @@ public class UserDto extends BaseDto implements Serializable {
     @JsonIgnore
     private String id;
 
-    @JsonIgnore
     private String pin;
 
     @JsonIgnore

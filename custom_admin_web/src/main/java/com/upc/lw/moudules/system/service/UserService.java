@@ -1,6 +1,7 @@
 package com.upc.lw.moudules.system.service;
 
 import com.upc.lw.request.user.UserRequest;
+import com.upc.lw.system.User;
 import com.upc.lw.system.dto.UserDto;
 import org.springframework.data.domain.Pageable;
 
@@ -17,4 +18,6 @@ public interface UserService {
     Map<String,Object> findUsers(Pageable pageable);
 
     Map<String,Object> findUserListByArg(UserRequest.QueryArg arg, Pageable pageable);
+
+    void createUser(User user);
 }
